@@ -1,0 +1,6 @@
+10 push 10
+20 push 20
+30 add
+40 print
+#comm
+50 exit

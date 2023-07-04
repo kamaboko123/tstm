@@ -1,0 +1,56 @@
+
+5 jmp 500
+
+# func fibonnaci(n)
+10 enter
+20 loada 1
+30 bnqz 100
+40 push 0
+50 ret
+
+100 loada 1
+110 push 1
+120 sub
+130 bnqz 200
+140 push 1
+150 ret
+
+# call func(n-1)
+200 loada 1
+210 push 1
+220 sub
+230 call 10
+240 popr 1
+
+# call func(n-2)
+250 loada 1
+260 push 2
+270 sub
+280 call 10
+290 popr 1
+
+300 add
+310 ret
+
+
+# local var 1
+500 push 0
+
+510 loadl 1
+520 push 1
+525 add
+526 storel 1
+527 loadl 1
+# max
+530 push 11
+540 sub
+550 beqz 700
+560 loadl 1
+580 call 10
+590 popr 1
+600 print
+610 pop
+630 jmp 510
+
+700 pop
+710 exit
