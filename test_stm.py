@@ -8,6 +8,10 @@ def datasets():
             "expected": "30\n"
         },
         {
+            "program_file": "test/sub.stml",
+            "expected": "10\n"
+        },
+        {
             "program_file": "test/fibonacci1.stml",
             "expected": "55\n"
         },

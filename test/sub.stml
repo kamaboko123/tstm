@@ -1,0 +1,5 @@
+10 push 20
+20 push 10
+30 sub
+40 print
+50 exit
