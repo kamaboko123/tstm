@@ -3,6 +3,8 @@ import logging
 import sys
 import re
 import traceback
+import tkinter
+from gui import StackView
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -247,6 +249,9 @@ if __name__ == "__main__":
     stm.set_program(prog)
     #stm.dump_program()
 
+    gui = tkinter.Tk()
+    stack_view = StackView(gui, stm)
+
     try:
         if args.interactive:
             while True:
@@ -269,7 +274,7 @@ if __name__ == "__main__":
                     print("d | dump :  Dump stack")
                     print("e | exit :  Exit program")
                     print("n | next :  Execute Next Step")
-
+                stack_view.hoge()
                 print()
         else:
             while True:
@@ -278,6 +283,9 @@ if __name__ == "__main__":
                     break
     except Exception:
         traceback.print_exc()
-        print(f"pc: {stm.pc}")
+        sys.stderr.write(f"pc: {stm.pc}\n")
+        sys.exit(1)
+
+    sys.exit(0)
 
 
