@@ -1,0 +1,9 @@
+10 push 500
+20 push 20
+30 div
+40 print
+50 push 23
+60 push 5
+70 div
+80 print
+90 exit

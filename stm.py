@@ -57,9 +57,6 @@ class Stm:
             print("%04d | %08s | %04s" % (i, data, "*bp" if self.bp == i else ""))
         print("==================")
 
-    def run(self):
-        pass
-
     # 以下は実際の命令の実行処理
     def step(self):
         inst = self.program[self.pc]
@@ -122,8 +119,6 @@ class Stm:
         elif inst[0] == "print":
             self._print()
         
-        # TODO: gt lt eq
-
         elif inst[0] == "beqz":
             self._beqz(inst[1])
         
@@ -168,14 +163,14 @@ class Stm:
         self._push(self.a)
 
     def _div(self):
-        self.a = self._pop()
         self.b = self._pop()
+        self.a = self._pop()
         self.a //= self.b
         self._push(self.a)
 
     def _mod(self):
-        self.a = self._pop()
         self.b = self._pop()
+        self.a = self._pop()
         self.a %= self.b
         self._push(self.a)
 
@@ -241,6 +236,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Tiny Stack Machine")
     parser.add_argument("program_file_name", type=str, help="実行するプログラムファイル")
     parser.add_argument("-i", "--interactive", action='store_true', help="インタラクティブモード")
+    parser.add_argument("-d", "--debug", action='store_true', help="スタックビューアーを表示します")
     args = parser.parse_args()
 
     prog = read_program(sys.argv[1])
@@ -249,8 +245,9 @@ if __name__ == "__main__":
     stm.set_program(prog)
     #stm.dump_program()
 
-    gui = tkinter.Tk()
-    stack_view = StackView(gui, stm)
+    if args.debug:
+        gui = tkinter.Tk()
+        stack_view = StackView(gui, stm)
 
     try:
         if args.interactive:
@@ -274,7 +271,8 @@ if __name__ == "__main__":
                     print("d | dump :  Dump stack")
                     print("e | exit :  Exit program")
                     print("n | next :  Execute Next Step")
-                stack_view.hoge()
+                if args.debug:
+                    stack_view.update()
                 print()
         else:
             while True:

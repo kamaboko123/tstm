@@ -12,6 +12,18 @@ def datasets():
             "expected": "10\n"
         },
         {
+            "program_file": "test/mul.stml",
+            "expected": "200\n"
+        },
+        {
+            "program_file": "test/div.stml",
+            "expected": "25\n4\n"
+        },
+        {
+            "program_file": "test/mod.stml",
+            "expected": "0\n3\n"
+        },
+        {
             "program_file": "test/fibonacci1.stml",
             "expected": "55\n"
         },
