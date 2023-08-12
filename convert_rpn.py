@@ -20,9 +20,8 @@ operator_convert_table = {
 def move_output(output, buf):
     while len(buf) > 0:
         data = buf.pop()
-        if data == "(":
-            break
-        elif data == ")":
+        # 括弧は出力しない
+        if data in ["(", ")"]:
             continue
         output.append(data)
 
@@ -34,14 +33,15 @@ def convert(infix):
         if token.isdecimal():
             rpn_output.append(token)
         
+        # 演算子は後置にするので一度バッファに入れておく
         elif token in operator_priority.keys():
             if token == "(":
                 pass
             elif token == ")":
-                # 閉じ括弧が出てきたらすべて出力(それまでの計算を確定させる)
+                # 閉じ括弧が出てきたらすべて出力(カッコ内の計算を確定させる)
                 move_output(rpn_output, operator_buffer)
             elif len(operator_buffer) > 0 and operator_priority[token] < operator_priority[operator_buffer[-1]]:
-                # 優先度の高い演算子がバッファに入っていたら先にバッファの中を出力
+                # 優先度の高い演算子がバッファに入っていたら先にバッファの中を出力(それまでの計算を確定させる)
                 move_output(rpn_output, operator_buffer)
             operator_buffer.append(token)
 
