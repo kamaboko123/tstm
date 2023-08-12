@@ -1,0 +1,11 @@
+10 push 2
+20 push 3
+30 push 1
+40 sub
+50 mul
+60 push 2
+70 mul
+80 push 4
+90 add
+100 print
+110 exit
