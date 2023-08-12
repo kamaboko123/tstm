@@ -1,0 +1,5 @@
+10 push 10
+20 push 20
+30 mul
+40 print
+50 exit
