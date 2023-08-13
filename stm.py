@@ -3,7 +3,6 @@ import logging
 import sys
 import re
 import traceback
-import tkinter
 from gui import StackView
 
 logging.basicConfig(level=logging.DEBUG)
@@ -246,6 +245,7 @@ if __name__ == "__main__":
     #stm.dump_program()
 
     if args.debug:
+        import tkinter
         gui = tkinter.Tk()
         stack_view = StackView(gui, stm)
 
@@ -279,6 +279,8 @@ if __name__ == "__main__":
                 state = stm.step()
                 if not state:
                     break
+                if args.debug:
+                    stack_view.update()
     except Exception:
         traceback.print_exc()
         sys.stderr.write(f"pc: {stm.pc}\n")
